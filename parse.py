@@ -4,8 +4,9 @@ get_info parses data/data.txt, example:
     Vadim ; Vadim97
     Denis ;Elzedeka97
 """
+import requests
 
-def get_info(filename: str) -> str:
+def get_info(filename: str, url: str="https://github.com/") -> str:
     """get name and logins from file filename
     Args:
         path to file with name and logins filename.
@@ -17,7 +18,8 @@ def get_info(filename: str) -> str:
             {'name': 'Denis', 'login': 'Elzedeka97'}
         ]
     Raises:
-        ValueError if bad file format - no ":" in line
+        ValueError: if bad file format - no ":" in line
+        RuntimeError: if no login found at github.com
 
     """
     res = []
@@ -31,6 +33,10 @@ def get_info(filename: str) -> str:
                     "name": name,
                     "login": login,
                 })
+                repo_url = f"{url}{login}"
+                responce = requests.get(repo_url)
+                if responce.status_code != 200:
+                    raise RuntimeError("no such user")
             except ValueError as err:
                 raise ValueError(f"Cannot parse file: {err}") from err
     return res

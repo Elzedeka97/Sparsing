@@ -1,7 +1,8 @@
 #Study parsing project
 
-### Quickstart
-'''bash
+## Quickstart
+```bash
 pip install -r requirements.txt
 
 python3 -m parse.py
+```
