@@ -4,5 +4,5 @@
 ```bash
 pip install -r requirements.txt
 
-python3 -m parse.py
+python3 -m src.parse
 ```
