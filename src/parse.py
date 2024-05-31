@@ -34,7 +34,7 @@ def get_info(filename: str, url: str="https://github.com/") -> str:
                     "login": login,
                 })
                 repo_url = f"{url}{login}"
-                responce = requests.get(repo_url)
+                responce = requests.get(repo_url, timeout=5)
                 if responce.status_code != 200:
                     raise RuntimeError("no such user")
             except ValueError as err:
